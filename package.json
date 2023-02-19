@@ -4,6 +4,9 @@
     "description": "",
     "main": "src/bin/browsershell.js",
     "scripts": {},
+    "publishConfig": {
+        "access": "public"
+    },
     "bin": {
         "browsershell": "src/bin/browsershell.js"
     },
