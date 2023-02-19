@@ -8,22 +8,28 @@ function startConsoleCatcher(host, port) {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-
-    const host = process.argv[2]
-    const port = parseInt(process.argv[3])
-
     const shell = `(() => {
-        const log = console.log;
-        console.log = (...args) => {
-            fetch('http://${host}:${port}/log', {
-                method: "POST",
-                body: JSON.stringify({res: args.join(' ')}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            log(...args);
+        function hook(obj, funcname, callback) {
+            const original = obj[funcname];
+            obj[funcname] = function () {
+                callback.apply(this, arguments);
+                return original.apply(this, arguments);
+            }
         }
+        function sendLog(type) {
+            return function(...args) {
+                fetch('http://${host}:${port}/log', {
+                    method: "POST",
+                    body: JSON.stringify({type, res: args.join(' ')}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            }
+        }
+        hook(console, 'log', sendLog('log'))
+        hook(console, 'warn', sendLog('warn'))
+        hook(console, 'error', sendLog('error'))
     })()
     `
 
@@ -34,7 +40,7 @@ function startConsoleCatcher(host, port) {
     })
 
     app.post('/log', function (req, res) {
-        console.log(req.body.res)
+        console.log(req.body.type, req.body.res)
         res.send('')
     })
 
