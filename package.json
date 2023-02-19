@@ -10,7 +10,9 @@
     "bin": {
         "browsershell": "src/bin/browsershell.js"
     },
-    "files": [],
+    "files": [
+        "src/**/*"
+    ],
     "author": "Sebastian Dittrich",
     "license": "MIT",
     "bugs": {
