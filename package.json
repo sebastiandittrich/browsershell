@@ -1,5 +1,5 @@
 {
-    "name": "browsershell",
+    "name": "@sebastiandittrich/browsershell",
     "version": "1.0.2",
     "description": "",
     "main": "src/bin/browsershell.js",
