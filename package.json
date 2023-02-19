@@ -1,6 +1,6 @@
 {
     "name": "browsershell",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "main": "src/bin/browsershell.js",
     "scripts": {},
