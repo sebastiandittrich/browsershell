@@ -7,10 +7,7 @@
     "bin": {
         "browsershell": "src/bin/browsershell.js"
     },
-    "files": [
-        "/brainunfuck.js",
-        "/brainfuck.js"
-    ],
+    "files": [],
     "author": "Sebastian Dittrich",
     "license": "MIT",
     "bugs": {
